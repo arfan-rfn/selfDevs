@@ -4,8 +4,9 @@ class Test{
         this.y = y;
     }
 
-    sum(){
-        return x + y;
+    sum(a, b){
+        console.log(a + b);
     }
-
 }
+
+module.exports = Test;

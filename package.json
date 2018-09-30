@@ -1,0 +1,25 @@
+{
+  "name": "selfdevs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arfan-rfn/selfDevs.git"
+  },
+  "keywords": [
+    "selfDevs"
+  ],
+  "author": "Md Arfan Uddin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arfan-rfn/selfDevs/issues"
+  },
+  "homepage": "https://github.com/arfan-rfn/selfDevs#readme",
+  "dependencies": {
+    "express": "4.16.3"
+  }
+}

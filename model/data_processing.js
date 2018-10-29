@@ -5,6 +5,7 @@ const dataModel = require('./data_model');
 class DataProcessing{
     constructor(callback){
         const mongoose = require('mongoose');
+        mongoose.set('useFindAndModify', false);
         mongoose.connect("mongodb://asif:asif111sharif@ds121593.mlab.com:21593/dev", { useNewUrlParser: true });
         mongoose.connection.on('error', (err)=>{
             callback(err);
@@ -51,6 +52,37 @@ class DataProcessing{
                 callback(null, result);
             }else{
                 callback(null, null); 
+            }
+        });
+    }
+
+    updateOne(id, updateData, callback){
+        if (id._id) {
+            dataModel.user.findByIdAndUpdate(id._id, updateData, (err, result)=>{
+                if (err) {
+                    callback(err, null);
+                }else{
+                    callback(null, result); 
+                }
+            });   
+        }else{
+            dataModel.user.findOneAndUpdate(id, updateData, (err, result)=>{
+                if (err) {
+                    callback(err, null);
+                }else{
+                    callback(null, result); 
+                }
+            });
+        }
+    }
+
+    addComment(data, callback){
+        var newData = dataModel.comment(data);
+        newData.save((err, result)=>{
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, result);
             }
         });
     }

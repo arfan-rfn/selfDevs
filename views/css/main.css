@@ -1,5 +1,4 @@
 #content{
-    background-color: aquamarine;
     width: 50%;
     margin: 100px auto;
 }
@@ -20,4 +19,5 @@
 span{
     font-family: 'Righteous', cursive;
     font-size: 50px;
+    color: rgba(51, 47, 54, 1);
 }

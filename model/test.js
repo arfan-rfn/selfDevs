@@ -24,13 +24,13 @@ var dataProcessing = new DataProcessingObj((err) => {
 // );
 
 // var user = {
-//     username: 'arfan',
-//     password: 'nity',
-//     email: 'arfan@selfdevs.com',
+//     username: 'chowdhury',
+//     password: 'uddin',
+//     email: 'rfn.com',
 //     DOB: Date.now()
 // };
 
-// dataProcessing.saveUser(user,
+// dataProcessing.updateUserId(user,
 //     (err, result) => {
 //         if (err) {
 //             console.log(err.message);
@@ -48,12 +48,46 @@ var dataProcessing = new DataProcessingObj((err) => {
 //     } 
 // });
 
-dataProcessing.findAUser({password: 'pass'}, (err, result)=>{
-    if (err) {
-        console.log(err.message);
-    } else if(result){
-        console.log(result);
-    } else{
-        console.log("no data found");
+
+// dataProcessing.updateOne({username: 'arfan'}, {password: 'eeeeeeee'}, (err, result)=>{
+//     if (err) {
+//         console.log(err.message);
+//     } else if(result){
+//         console.log(result);
+//     } else{
+//         console.log("no data found");
+//     }
+// });
+
+// dataProcessing.findAUser({username: 'arfan'}, (err, result)=>{
+//     if (err) {
+//         console.log(err.message);
+//     } else if(result){
+//         console.log(result);
+//     } else{
+//         console.log("no data found");
+//     }
+// });
+
+var comment = {
+    desc: "this is the 2 description of the comment",
+    type: "2 test comment",
+    parent: '5bb56c1f32f10a1ab070e7df',
+    author: '5bb573af702be321802f1261',
+    child: ['5bb6ce551d48e857fe3ad7f7', '5bb6cf53977dba590ac7b894', ],
+};
+
+dataProcessing.addComment(comment,
+    (err, result) => {
+        if (err) {
+            console.log(err.message);
+        } else {
+            console.log("result: " + result);
+            console.log("user ");
+            dataProcessing.findAUser({_id: result.author}, (error, rslt)=>{
+                if(error){console.log(error);}
+                else{console.log(rslt);}
+            });
+        }
     }
-});
+);

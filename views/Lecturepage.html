@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .checked {
+        color: orange;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Portfolio</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Join Instructor Team</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Registration</a></li>
+
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container text-center">
+     <p>Introduction To Python</p>
+    <div style="width:100%">
+        <div style="float:left;width:60%">
+
+            <div class="iframe">
+              <iframe width="660" height="415" src="https://www.youtube.com/embed/K-Csb6doONc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <button type="button" class="btn btn-primary">Previous</button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-info">Q/A</button>&nbsp;&nbsp; &nbsp;&nbsp;
+            <button type="button" class="btn btn-success">Next</button>
+         </div>
+         <div style="float:left;width:40%">Second</div>
+
+      </div>
+  </div>
+</div>
+
+
+<div style="width:100%">
+    <div class="well" style="font-size:16px;margin-left:50px;margin-right:50px;">
+      Become a Python Programmer and learn one of employer's most requested skills of 2018!
+This is the most comprehensive, yet straight-forward, course for the Python programming language on Udemy! Whether you have never
+programmed before, already know basic syntax, or want to learn about the advanced features of Python, this course is for you! In
+this course we will teach you Python 3. (Note, we also provide older Python 2 notes in case you need them)
+With over 100 lectures and more than 20 hours of video this comprehensive course leaves no stone unturned! This course includes
+quizzes, tests, and homework assignments as well as 3 major projects to create a Python project portfolio!
+This course will teach you Python in a practical manner, with every lecture comes a full coding screencast and a corresponding codenotebook! Learn in whatever manner is best for you!
+We will start by helping you get Python installed on your computer, regardless of your operating system, whether its Linux, MacOS, or
+ Windows, we've got you covered!
+
+    </div>
+</div>
+
+<br><br>
+
+
+<div class="container" style="padding-right:100px;padding-left:100px;">
+
+  <div class="media">
+    <div class="media-left">
+        <a href="#">
+          <span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+    <div class="media-body">
+        <div class="form-group">
+          <label for="comment">Comment:</label>
+          <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+
+     </div>
+       <p style="margin-left:100px;">
+            <button type="button" class="btn btn-info">Ask</button>&nbsp;&nbsp; &nbsp;&nbsp;
+            <button type="button" class="btn btn-success">Cancel</button>
+        </p>
+  </div>
+
+
+  <div class="media">
+    <div class="media-left">
+
+        <a href="#">
+          <span class="glyphicon glyphicon-user"></span>
+        </a>
+
+    </div>
+    <div class="media-body">
+      <div class="well">
+      <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+      <!-- Nested media object -->
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <span class="glyphicon glyphicon-user"></span>
+          </a>
+        </div>
+        <div class="media-body">
+          <div class="well">
+          <h4 class="media-heading">John Doe <small><i>Posted on February 20, 2016</i></small></h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    <!-- Nested media object -->
+    <div class="media">
+      <div class="media-left">
+
+      <a href="#">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+      </div>
+      <div class="media-body">
+        <div class="well">
+        <h4 class="media-heading">Jane Doe <small><i>Posted on February 19, 2016</i></small></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -105,15 +105,15 @@ var dataProcessing = new DataProcessingObj((err) => {
 //         }
 //     });
 
-dataProcessing.addRating(constant.schemaType.USER, '5bee7bf480899403c034927d', '5bb57a4cd4a3072490a35a33', 77, (err, result) => {
-    if (err) {
-        console.log("here " +err.message);
-    } else if(result){
-        console.log("\nresult: "+result);
-    }else{
-        console.log("no result");
-    }
-});
+// dataProcessing.addRating(constant.schemaType.USER, '5bee7bf480899403c034927d', '5bb57a4cd4a3072490a35a33', 77, (err, result) => {
+//     if (err) {
+//         console.log("here " +err.message);
+//     } else if(result){
+//         console.log("\nresult: "+result);
+//     }else{
+//         console.log("no result");
+//     }
+// });
 
 // var lecture = {
 //     // _id: '5bee532fc4a8207d3c547837',

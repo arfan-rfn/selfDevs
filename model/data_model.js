@@ -13,44 +13,50 @@ var userSchema = new Schema({
     password: {type: String, select: false},
     email: String,
     mobile: Number,
-    enroll: [ObjectId],
-    teach: [ObjectId],
-    comments: [ObjectId],
-    profile: String,
-    ratings: {},
+    enroll: {type:[ObjectId], default:[]},
+    teach: {type:[ObjectId], default:[]},
+    comments: {type:[ObjectId], default:[]},
+    profile_pic: String,
     dob: {type: Date},
+    rating:{type: [{user: ObjectId, rate: Number}], default: []},
+    point:{
+        size: {type: Number, default: 0},
+        sum: {type: Number, default: 0},
+        point: {type: Number, default: 0},
+    },
     date: {type: Date, default: Date.now()},
 });
 
 var courseSchema = new Schema({
-    author: [ObjectId],
+    authors: [ObjectId],
     title: String,
     desc: String,
+    profile_pic: String,
     topic: [String],
     tags: [String],
-    lectures: [ObjectId], // important for sort the sections
-    enrollment: Number,
-    like: Number,
-    voters: Number,
+    lectures: {type: [ObjectId], default: []}, // important for sort the sections
+    rating:{type: [{user: ObjectId, rate: Number}], default: []},
+    enroll: {type: [ObjectId], default: []},
+    paid: {type: Boolean, default: false},
     date: {type: Date, default: Date.now()},
 });
 
 var lectureSchema = new Schema({
-    video: String,
-    title: String,
+    authors: [ObjectId],
+    video_id: {type: String, required: true},
+    title: {type: String, required: true},
     desc: String,
-    section: Boolean, // if true have child, false no child, a lecture
-    child:[ObjectId],  // important for sort all the lectures in a section
-    author: [ObjectId],
-    parent: ObjectId,
+    course: ObjectId,
+    profile_pic: String,
     tags:[String],
     resources: [String],
-    comments: [ObjectId],
+    paid: {type: Boolean, default: false},
+    rating:{type: [{user: ObjectId, rate: Number}], default: []},
     date: {type: Date, default: Date.now()},
 });
 
 var commentSchema = new Schema({
-    desc: {type: String, required: true},
+    desc: {type: String},
     type: {
         type: String, 
         required: true, 
@@ -64,8 +70,7 @@ var commentSchema = new Schema({
     author: {type: ObjectId, required: true},
     child: {type: [ObjectId],},
     notify: [ObjectId],  // notify all the people something happens
-    like: {type: Number, default: 0},
-    dislike: {type: Number, default: 0},
+    rating:{type: [{user: ObjectId, rate: Number}], default: []},
     resources: [String],
     date: {type: Date, default: Date.now()},
 });

@@ -3,84 +3,46 @@
 const dataModel = require('./data_model');
 const devConstant = require('./dev_constant');
 
-class DataProcessing{
-    constructor(callback){
+class DataProcessing {
+    constructor(callback) {
         const mongoose = require('mongoose');
         mongoose.set('useFindAndModify', false);
-        mongoose.connect("mongodb://asif:asif111sharif@ds121593.mlab.com:21593/dev", { 
+        mongoose.connect("mongodb://asif:asif111sharif@ds121593.mlab.com:21593/dev", {
             useCreateIndex: true,
-            useNewUrlParser: true 
+            useNewUrlParser: true
         });
-        mongoose.connection.on('error', (err)=>{
-            callback(err);
-        });
+        mongoose.connection.on('error', (err) => callback(err));
     }
 
-    saveData(data, callback){
+    saveData(data, callback) {
         var newData = dataModel.test(data);
-        newData.save((err, result)=>{
-            if(err){
-                callback(err, null);
-            }else{
-                callback(null, result);
-            }
-        });
+        newData.save((err, data) => callback(err, data));
     }
 
-    saveUser(data, callback){
+    saveUser(data, callback) {
         var newData = dataModel.user(data);
-        newData.save((err, result)=>{
-            if(err){
-                callback(err, null);
-            }else{
-                callback(null, result);
-            }
-        });
+        newData.save((err, data) => callback(err, data));
     }
 
-    findAllUser(callback){
-        dataModel.user.find({}, (err, result)=>{
-            if (err) {
-                callback(err, null);
-            }else{
-                callback(null, result);
-            }
-        });
+    findListOfUser(list, callback) {
+        dataModel.user.find({'_id': {'$in' : list}}, (err, data) => callback(err, data));
+        // dataModel.user.find({}, (err, data) => callback(err, data));
     }
 
-    findAUser(data, callback){
-        dataModel.user.find(data, (err, result)=>{
-            if (err) {
-                callback(err, null);
-            }else if(result.length > 0){
-                callback(null, result);
-            }else{
-                callback(null, null); 
-            }
-        });
+    findAUser(data, callback) {
+        dataModel.user.find(data, (err, data) => callback(err, data));
     }
 
-    updateUserInfo(id, updateData, callback){
+
+    updateUserInfo(id, updateData, callback) {
         if (id._id) {
-            dataModel.user.findByIdAndUpdate(id._id, updateData, (err, result)=>{
-                if (err) {
-                    callback(err, null);
-                }else{
-                    callback(null, result); 
-                }
-            });   
-        }else{
-            dataModel.user.findOneAndUpdate(id, updateData, (err, result)=>{
-                if (err) {
-                    callback(err, null);
-                }else{
-                    callback(null, result); 
-                }
-            });
+            dataModel.user.findByIdAndUpdate(id._id, updateData, (err, data) => callback(err, data));
+        } else {
+            dataModel.user.findOneAndUpdate(id, updateData, (err, data) => callback(err, data));
         }
     }
 
-    addComment(data, callback){
+    addComment(data, callback) {
         data.notify = [data.author];
         switch (data.type) {
             case devConstant.commentType.QUESTION:
@@ -106,25 +68,117 @@ class DataProcessing{
 
             default:
                 throw "CommentSchema.type must be a valid option!";
-                break;
         }
         var newData = dataModel.comment(data);
-        newData.save((err, result)=>{
-            if(err){
+        newData.save((err, data) => {
+            if (err) {
                 callback(err, null);
-            }else{
+            } else {
                 // update user schema
-                dataModel.user.findByIdAndUpdate(result.author, 
-                    {$push:{comments:result._id}}, 
-                    (err, updatedUser)=>{
-                    if (err) {
-                        callback(err, null);
-                    }else{
-                        callback(null, result); 
-                    }
-                });
+                dataModel.user.findByIdAndUpdate(data.author, {
+                        $push: {
+                            comments: data._id
+                        }
+                    },
+                    (err, updatedUser) => {
+                        if (err) {
+                            callback(err, null);
+                        } else {
+                            callback(null, data);
+                        }
+                    });
             }
         });
+    }
+
+    getAllCourses(callback){
+        dataModel.course.find({}, (err, data) => callback(err, data));
+    }
+
+    updateCourseAuthor(courseJson, callback){
+        this.findListOfUser(courseJson.authors, (err, data) => {
+            courseJson.authors = data;
+            console.log(courseJson);
+            return callback(err, data);
+        });
+    }
+
+    addCourse(courseData, callback) {
+        if (courseData._id) {
+            dataModel.course.findByIdAndUpdate(courseData._id, courseData,
+                (err, data) => callback(err, data)
+            );
+        } else {
+            var newCourse = dataModel.course(courseData);
+            newCourse.save((err, data) => callback(err, data));
+        }
+    }
+
+    addLecture(lectureData, callback) {
+        if (lectureData._id) {
+            dataModel.lecture.findByIdAndUpdate(lectureData._id, lectureData,
+                (err, data) => callback(err, data)
+            );
+        } else {
+            var newCourse = dataModel.lecture(lectureData);
+            newCourse.save((err, data) => {
+                dataModel.course.findByIdAndUpdate(data.course, {$push:{lectures: data._id}},
+                    (newErr, newData) => callback(newErr || err, data));
+            });
+        }
+    }
+
+    addRating(schema, id, user, rate, callback) {
+        var errFound;
+        dataModel[schema].findByIdAndUpdate(id, {
+            $pull: {
+                rating: {user: user}
+            }
+        }, (err) => errFound = err);
+        dataModel[schema].findByIdAndUpdate(id, {
+            $push: {
+                rating: {
+                    user: user,
+                    rate: rate
+                }
+            }
+        }, (err, data) => callback(errFound || err, data));
+    }
+
+    getUserInfo(id, callback){
+        var userInfo = {
+            userData:{},
+            course: [],
+            enroll:[]
+        };
+        dataModel.user.findById(id, (err, data)=>{
+            if(err){
+                return callback(err, null);
+            }else if(data){
+                userInfo.userData = data;
+            }else{
+                return callback(null, null);
+            }
+        });
+
+        dataModel.course.find({authors: id}, (err, data)=>{
+            if(err){
+                return callback(err, userInfo);
+            }else{
+                userInfo.course = data;
+            }
+        });
+
+        dataModel.course.find({enroll: id}, (err, data)=>{
+            if(err){
+                return callback(err, userInfo);
+            }else{
+                userInfo.enroll = data;
+                return callback(err, userInfo);
+            }
+        });
+
+
     }
 }
 module.exports = DataProcessing;

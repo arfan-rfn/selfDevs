@@ -1,0 +1,35 @@
+.card{
+    /* background-color: #3C7D65; */
+    border-radius: 15px;
+    margin: 15px;
+    max-width: 250px;
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card >a>img{
+    border-radius: 15px 15px 0 0; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: center;
+}
+
+.card > a{
+    background-color: #3C7D65;
+    width: 100%;
+    height: 50px;;
+    border-radius: 0 0 15px 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.card > a:hover{
+    text-decoration: none;
+    background-color: rgb(29, 73, 57);
+    width: 100%;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn{
+    color: white;
+}

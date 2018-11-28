@@ -10,6 +10,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <link rel="stylesheet" href="public/css/index.css">
+
+
+
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -17,8 +21,9 @@
       margin-bottom: 0;
       border-radius: 0;
     }
+
     .checked {
-        color: orange;
+      color: orange;
     }
 
     /* Add a gray background color and some padding to the footer */
@@ -46,6 +51,7 @@
           <li class="active"><a href="#">Home</a></li>
 
         </ul>
+
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Join Instructor Team</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Registration</a></li>
@@ -59,6 +65,8 @@
   <div class="jumbotron" style="padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;">
     <div class="container" style="width: unset;padding-left:0px;padding-right:0px;margin-right:unset;margin-left:unset">
       <img src="public/images/f.jpg" class="img-responsive" style="width:100%;height:500px;" alt="Image">
+
+      <img src="public/images/bg.jpg" class="img-responsive" style="width:100%;" alt="Image">
 
     </div>
   </div>
@@ -80,18 +88,34 @@
           <p>
             <%=data[i].enroll.length%> people Enroll</p>
           <p align="left"><span class="fa fa-star checked"></span>
+      <a href="/course/<%=data[i]._id%>">
+        <div class="card" , id="<%=data[i]._id%>">
+          <img src="/public/images/a.jpg" class="img-responsive" style="width:324" alt="Image">
+          <p align="left">
+            <%=data[i].title%> <br>
+            <%for(var j=0; j < data[i].authors.length; j++){%>
+            <%= data[i].authors[j].username%>
+            <%}%>
+          </p>
+          <p>
+            <%=data[i].enroll.length%> Enroll</p>
+          <p align="left">
+            <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star "></span>
             <span class="fa fa-star "></span>
             4.0(45)</p>
+          <a class="btn btn-primary" href="/course/<%=data[i]._id%>" role="button">Enroll now</a>
         </div>
+      </a>
       <%}%>
     </div>
   </div><br>
 
   <footer class="container-fluid text-center">
     <p>Footer Text</p>
+
   </footer>
 
 </body>

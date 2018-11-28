@@ -28,7 +28,7 @@ var userSchema = new Schema({
 });
 
 var courseSchema = new Schema({
-    authors: [ObjectId],
+    authors: [{type: ObjectId, ref: 'User'}],
     title: String,
     desc: String,
     profile_pic: String,
@@ -37,6 +37,7 @@ var courseSchema = new Schema({
     lectures: {type: [ObjectId], default: []}, // important for sort the sections
     rating:{type: [{user: ObjectId, rate: Number}], default: []},
     enroll: {type: [ObjectId], default: []},
+    comments: {type:[ObjectId], default:[]},
     paid: {type: Boolean, default: false},
     date: {type: Date, default: Date.now()},
 });
@@ -63,7 +64,8 @@ var commentSchema = new Schema({
         enum: [devConstant.commentType.QUESTION,
             devConstant.commentType.ANSWER, 
             devConstant.commentType.COMMENT, 
-            devConstant.commentType.REVIEW]},
+            devConstant.commentType.REVIEW,
+            devConstant.commentType.POST]},
     solved: Boolean,
     anonymous: {type: Boolean, default: false},
     parent: {type: ObjectId, required: true},

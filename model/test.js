@@ -87,23 +87,21 @@ var dataProcessing = new DataProcessingObj((err) => {
 //     }
 // );
 
-// var course = {
-//     _id: '5bee312566d1a36e62ff9b82',
-//     authors: ['5bb5755216efef22d9d88e6a'],
-//     title: 'This is the course title',
-//     desc: 'This is the updated description of the title',
-//     topic: ['topic'],
-//     tags: ['#loop'],
-// };
+var course = {
+    authors: ['5bb573af702be321802f1261'],
+    title: 'title of the course',
+    desc: 'this is the description of the course',
+    topic: ['python'],
+};
 
-// dataProcessing.addCourse(course, 
-//     (err, result)=>{
-//         if(err){
-//             console.log(err.message);
-//         }else{
-//             console.log('result: ' + result);
-//         }
-//     });
+dataProcessing.addCourse(course, 
+    (err, result)=>{
+        if(err){
+            console.log(err.message);
+        }else{
+            console.log('result: ' + result);
+        }
+    });
 
 // dataProcessing.addRating(constant.schemaType.USER, '5bee7bf480899403c034927d', '5bb57a4cd4a3072490a35a33', 77, (err, result) => {
 //     if (err) {

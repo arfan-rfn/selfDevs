@@ -24,13 +24,15 @@ class DataProcessing {
         newData.save((err, data) => callback(err, data));
     }
 
-    findAllUser(callback) {
-        dataModel.user.find({}, (err, data) => callback(err, data));
+    findListOfUser(list, callback) {
+        dataModel.user.find({'_id': {'$in' : list}}, (err, data) => callback(err, data));
+        // dataModel.user.find({}, (err, data) => callback(err, data));
     }
 
     findAUser(data, callback) {
         dataModel.user.find(data, (err, data) => callback(err, data));
     }
+
 
     updateUserInfo(id, updateData, callback) {
         if (id._id) {
@@ -86,6 +88,18 @@ class DataProcessing {
                         }
                     });
             }
+        });
+    }
+
+    getAllCourses(callback){
+        dataModel.course.find({}, (err, data) => callback(err, data));
+    }
+
+    updateCourseAuthor(courseJson, callback){
+        this.findListOfUser(courseJson.authors, (err, data) => {
+            courseJson.authors = data;
+            console.log(courseJson);
+            return callback(err, data);
         });
     }
 

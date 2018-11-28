@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .checked {
+        color: orange;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Portfolio</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Join Instructor Team</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Registration</a></li>
+
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="jumbotron" style="padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;">
+    <div class="container" style="width: unset;padding-left:0px;padding-right:0px;margin-right:unset;margin-left:unset">
+      <img src="public/images/f.jpg" class="img-responsive" style="width:100%;height:500px;" alt="Image">
+
+    </div>
+  </div>
+
+  <div class="container-fluid bg-3 text-center">
+    <h3>Top Courses</h3><br>
+    <div class="row">
+      <%for(var i = 0; i < data.length; i++){%>
+        <div class="col-sm-3" , id="<%=data[i]._id%>">
+          <img src="/public/images/a.jpg" class="img-responsive" style="width:324" alt="Image">
+          <p align="left">
+            <%=data[i].title%> <br <%for(var j=0; j < data[i].authors.length; j++){%>
+            <%= data[i].authors[j].username%>
+            <%}%>
+          </p>
+          <form action="/course/<%=data[i]._id%>" method="get">
+            <input type="submit" class="btn btn-primary" value="Enroll now">
+          </from>
+          <p>
+            <%=data[i].enroll.length%> people Enroll</p>
+          <p align="left"><span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star "></span>
+            <span class="fa fa-star "></span>
+            4.0(45)</p>
+        </div>
+      <%}%>
+    </div>
+  </div><br>
+
+  <footer class="container-fluid text-center">
+    <p>Footer Text</p>
+  </footer>
+
+</body>
+
+</html>

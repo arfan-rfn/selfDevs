@@ -4,7 +4,8 @@ var commentTypeEnum = {
     QUESTION: "question",
     ANSWER: "answer",
     REVIEW: "review",
-    COMMENT: "comment"
+    COMMENT: "comment",
+    POST: "post"
 };
 
 var schemaEnum = {
